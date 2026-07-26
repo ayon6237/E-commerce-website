@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path');
 const app = express()
 const cors = require('cors')
 const DB = require('./config/db')
@@ -8,6 +9,7 @@ require('dotenv').config()
 const productRouter = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes.js');
 const orderRoutes = require('./routes/orderRoutes.js');
+const uploadRoutes = require('./routes/uploadRoutes.js');
 
 
 const port = process.env.PORT
@@ -16,6 +18,8 @@ app.use(express.json())
 app.use('/api/products',productRouter)
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 
 
